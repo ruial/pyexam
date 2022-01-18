@@ -35,7 +35,7 @@ optional arguments:
 
 The final result will look like this:
 
-![exam example](examples/screenshot.png)
+![exam example](https://raw.githubusercontent.com/ruial/pyexam/master/examples/screenshot.png)
 
 You can also import this package to use in your own Python code, as demonstrated in [tests](tests/). Some new possible features include generating exams from a question bank or randomize the questions to produce multiple exam versions.
 
