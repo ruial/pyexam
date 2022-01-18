@@ -1,23 +1,26 @@
-.PHONY: test coverage lint shell run build clean
+.PHONY: test coverage lint shell run build clean install
 
 test:
-	pytest -v
+	pipenv run pytest -v
 
 coverage:
-	pytest --cov=pyexam --cov-report term --cov-report html
+	pipenv run pytest --cov=pyexam --cov-report term --cov-report html
 
 lint:
-	flake8
-	mypy
+	pipenv run flake8
+	pipenv run mypy
 
 shell:
 	pipenv shell
 
 run:
-	python -m pyexam -i examples/cs-101-exam.yml
+	pipenv run python -m pyexam -i examples/cs-101-exam.yml
 
 build:
-	python -m build
+	pipenv run python -m build
 
 clean:
 	rm -rf *.egg-info dist
+
+install:
+	pipenv install --dev

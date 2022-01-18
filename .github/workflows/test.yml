@@ -1,0 +1,20 @@
+name: Test
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install pipenv
+        run: pipx install pipenv
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+          cache: 'pipenv'
+      - name: Setup dependencies
+        run: make install
+      - name: Linting
+        run: make lint
+      - name: Tests and coverage
+        run: make test
