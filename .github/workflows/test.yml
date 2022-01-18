@@ -1,5 +1,12 @@
 name: Test
-on: [push, pull_request]
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
 
 jobs:
   test:
@@ -17,4 +24,4 @@ jobs:
       - name: Linting
         run: make lint
       - name: Tests and coverage
-        run: make test
+        run: make coverage

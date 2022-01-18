@@ -1,4 +1,4 @@
-.PHONY: test coverage lint shell run build clean install
+.PHONY: test coverage lint shell run build clean install publish
 
 test:
 	pipenv run pytest -v
@@ -24,3 +24,6 @@ clean:
 
 install:
 	pipenv install --dev
+
+publish: build
+	pipenv run twine upload dist/*
