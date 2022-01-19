@@ -54,6 +54,7 @@ sections:
         points: 3
       - type: fill-in
         text: The Go language was developed at \fillin[Google].
+# You can remove sections by placing questions on the document root
 # questions:
 #   - type: long-answer
 #     text: Who developed Python?
