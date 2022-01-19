@@ -12,7 +12,7 @@ pip install pyexam
 
 ## Usage
 
-You need to define an YAML file for each exam. Check the [example document](examples/cs-101-exam.yml) and try the following commands:
+You need to define an YAML file for each exam. Check the [example document](https://github.com/ruial/pyexam/blob/master/examples/cs-101-exam.yml) and try the following commands:
 
 ```sh
 # Export exam
@@ -37,6 +37,6 @@ The final result will look like this:
 
 ![exam example](https://raw.githubusercontent.com/ruial/pyexam/master/examples/screenshot.png)
 
-You can also import this package to use in your own Python code, as demonstrated in [tests](tests/). Some new possible features include generating exams from a question bank or randomize the questions to produce multiple exam versions.
+You can also import this package to use in your own Python code, as demonstrated in [tests](https://github.com/ruial/pyexam/tree/master/tests). Some new possible features include generating exams from a question bank or randomize the questions to produce multiple exam versions.
 
 Beware that all input is trusted to increase customizability and keep the code simpler, you should sanitize the input for unstrusted clients.
