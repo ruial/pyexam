@@ -1,8 +1,13 @@
 name: Publish Python Package
 
 on:
-  release:
-    types: [created]
+  # release:
+  #   types: [created]
+  push:
+    branches:
+      - master
+    paths:
+      - 'setup.cfg'
 
 jobs:
   test:
@@ -24,14 +29,12 @@ jobs:
     needs: [test]
     steps:
       - uses: actions/checkout@v2
-      - name: Install pipenv
-        run: pipx install pipenv
       - uses: actions/setup-python@v2
         with:
           python-version: '3.9'
-          cache: 'pipenv'
+          cache: 'pip'
       - name: Setup dependencies
-        run: make install
+        run: pip install build twine
       - name: Publish
         env:
           TWINE_USERNAME: __token__
