@@ -1,6 +1,6 @@
 # pyexam
 
-A package and CLI application to convert simple YAML documents to LaTeX and PDF exams. You can use custom templates to change the visual design of the exam or even export it to a new format.
+A Python package and CLI application to convert simple YAML documents to LaTeX and PDF exams. You can use custom templates to change the visual design of the exam or even export it to a new format.
 
 ## Setup
 
@@ -12,13 +12,36 @@ pip install pyexam
 
 ## Usage
 
-You need to define an YAML file for each exam. Check the [example document](https://github.com/ruial/pyexam/blob/master/examples/cs-101-exam.yml) and try the following commands:
+You need to define an YAML file for each exam. Here's a minimal example:
+
+```yml
+name: CS 101
+header: |
+  Name: \rule{4in}{.4pt} \quad Student I.D.:\enspace\hrulefill
+  \vspace{.4in}
+# sections: []
+questions:
+  - type: long-answer
+    text: Who developed Python?
+    lines: 1.5cm
+    answer: Guido van Rossum
+  - type: fill-in
+    text: The Go language was developed at \fillin[Google].
+  - type: multiple-choice
+    text: Which of the following programming languages is interpreted?
+    options:
+      - text: R
+        correct: yes
+      - text: C++
+```
+
+For a more complete example with the full schema, check the [example document](https://github.com/ruial/pyexam/blob/master/examples/cs-101-exam.yml) and try the following commands:
 
 ```sh
 # Export exam
 python -m pyexam -i examples/cs-101-exam.yml -f pdf -o examples/output-exam
 
-# Export exam solutgithion
+# Export exam solution
 pyexam -i examples/cs-101-exam.yml -f pdf -o examples/output-exam-solution -s
 
 # All arguments
