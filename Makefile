@@ -16,14 +16,14 @@ shell:
 run:
 	pipenv run python -m pyexam -i examples/cs-101-exam.yml
 
+install:
+	pipenv install --dev
+
 build:
-	pipenv run python -m build
+	python -m build
 
 clean:
 	rm -rf *.egg-info dist
 
-install:
-	pipenv install --dev
-
 publish: build
-	pipenv run twine upload dist/*
+	twine upload dist/*
