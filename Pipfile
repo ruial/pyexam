@@ -14,6 +14,7 @@ autopep8 = "*"
 mypy = "*"
 pytest = "*"
 pytest-cov = "*"
+isort = "*"
 
 [requires]
 python_version = "3.9"

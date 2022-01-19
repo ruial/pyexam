@@ -1,4 +1,4 @@
-.PHONY: test coverage lint shell run build clean install publish
+.PHONY: test coverage lint format shell run install build clean publish
 
 test:
 	pipenv run pytest -v
@@ -9,6 +9,10 @@ coverage:
 lint:
 	pipenv run flake8
 	pipenv run mypy
+
+format:
+	autopep8 pyexam tests --recursive --in-place --pep8-passes 2000
+	isort pyexam tests
 
 shell:
 	pipenv shell
