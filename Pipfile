@@ -14,9 +14,6 @@ autopep8 = "*"
 mypy = "*"
 pytest = "*"
 pytest-cov = "*"
-isort = "*"
-build = "*"
-twine = "*"
 
 [requires]
 python_version = "3.9"
