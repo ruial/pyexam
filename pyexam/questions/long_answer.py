@@ -1,29 +1,35 @@
 from typing import Annotated, Literal
 
-from pydantic import Field, root_validator, validator
+from pydantic import Field, field_validator, model_validator
 
-from . import Question, QuestionType
+from .question import Question, QuestionType
 
 
 def norm_size(size: str) -> str:
-    if not (size.endswith('in') or size.endswith('cm')):
-        raise ValueError('height must be cm/in')
-    if not size[:-2].isnumeric:
-        raise ValueError('invalid numeric height')
+    if not (size.endswith("in") or size.endswith("cm")):
+        raise ValueError("height must be cm/in")
+    try:
+        float(size[:-2])
+    except ValueError:
+        raise ValueError("invalid numeric height")
     return size
 
 
 class LongAnswer(Question):
-    type: Literal[QuestionType.long_answer] = QuestionType.long_answer
-    answer: Annotated[str, Field(strip_whitespace=True, min_length=1)]
-    lines: str = ''
-    spaces: str = ''
+    type: Literal[QuestionType.LONG_ANSWER] = QuestionType.LONG_ANSWER
+    answer: Annotated[str, Field(min_length=1)]
+    lines: str = ""
+    spaces: str = ""
 
-    _normalize_sizes = validator('lines', 'spaces', allow_reuse=True)(norm_size)
+    @field_validator("lines", "spaces", mode="before")
+    def _normalize_sizes(cls, v):
+        if v == "":
+            return v
+        return norm_size(v)
 
-    @root_validator
-    def check_height_sizes(cls, values):
-        lines, spaces = values.get('lines'), values.get('spaces')
-        if (lines == '' and spaces == '') or (lines != '' and spaces != ''):
-            raise ValueError('a single key lines or spaces required')
-        return values
+    @model_validator(mode="after")
+    def check_height_sizes(self):
+        lines, spaces = self.lines, self.spaces
+        if (lines == "" and spaces == "") or (lines != "" and spaces != ""):
+            raise ValueError("a single key lines or spaces required")
+        return self

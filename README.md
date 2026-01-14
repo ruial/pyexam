@@ -4,11 +4,13 @@ A Python package and CLI application to convert simple YAML documents to LaTeX a
 
 ## Setup
 
-Install a LaTeX distribution and make sure ```latexmk``` is set in your system path.
+Install a LaTeX distribution with the exam, graphicx, framed and sectsty packages and make sure ```latexmk``` is set in your system path.
 
 ```sh
 pip install pyexam
 ```
+
+For development, check the Makefile for useful commands.
 
 ## Usage
 

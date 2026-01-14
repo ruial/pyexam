@@ -12,13 +12,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Install pipenv
-        run: pipx install pipenv
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v5
+      - name: Install poetry
+        run: pipx install poetry
+      - uses: actions/setup-python@v6
         with:
-          python-version: '3.9'
-          cache: 'pipenv'
+          python-version: '3.11'
+          cache: 'poetry'
       - name: Setup dependencies
         run: make install
       - name: Linting
