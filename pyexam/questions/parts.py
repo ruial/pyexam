@@ -2,11 +2,14 @@ from typing import Annotated, Literal, Union
 
 from pydantic import Field
 
-from . import FillIn, LongAnswer, MultipleChoice, Question, QuestionType
+from .fill_in import FillIn
+from .long_answer import LongAnswer
+from .multiple_choice import MultipleChoice
+from .question import Question, QuestionType
 
-PartsQuestionType = Annotated[Union[LongAnswer, MultipleChoice, FillIn], Field(discriminator='type')]
+PartsQuestionType = Annotated[Union[LongAnswer, MultipleChoice, FillIn], Field(discriminator="type")]
 
 
 class Parts(Question):
-    type: Literal[QuestionType.parts] = QuestionType.parts
-    parts: Annotated[list[PartsQuestionType], Field(min_items=1)]
+    type: Literal[QuestionType.PARTS] = QuestionType.PARTS
+    parts: Annotated[list[PartsQuestionType], Field(min_length=1)]

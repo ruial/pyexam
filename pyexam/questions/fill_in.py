@@ -1,17 +1,16 @@
 from typing import Literal
 
-from pydantic import root_validator
+from pydantic import model_validator
 
-from . import Question, QuestionType
+from .question import Question, QuestionType
 
 
 class FillIn(Question):
-    type: Literal[QuestionType.fill_in] = QuestionType.fill_in
+    type: Literal[QuestionType.FILL_IN] = QuestionType.FILL_IN
 
-    @root_validator
-    def check_text_separator(cls, values):
-        text = values.get('text')
-        count = text.count('\\fillin[')
+    @model_validator(mode="after")
+    def check_text_separator(self):
+        count = self.text.count("\\fillin[")
         if count == 0:
-            raise ValueError('unused separator')
-        return values
+            raise ValueError("unused separator")
+        return self

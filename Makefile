@@ -1,33 +1,35 @@
 .PHONY: test coverage lint format shell run install build clean publish
 
 test:
-	pipenv run pytest -v
+	poetry run pytest -v
 
 coverage:
-	pipenv run pytest --cov=pyexam --cov-report term --cov-report html
+	poetry run pytest --cov=pyexam --cov-report term --cov-report html
 
 lint:
-	pipenv run flake8
-	pipenv run mypy
+	poetry run black pyexam tests --check
+	poetry run isort pyexam tests --check
+	poetry run flake8 pyexam tests
+	poetry run mypy pyexam tests
 
 format:
-	autopep8 pyexam tests --recursive --in-place --pep8-passes 2000
-	isort pyexam tests
+	poetry run black pyexam tests
+	poetry run isort pyexam tests
 
 shell:
-	pipenv shell
+	poetry shell
 
 run:
-	pipenv run python -m pyexam -i examples/cs-101-exam.yml
+	poetry run pyexam -i examples/cs-101-exam.yml
 
 install:
-	pipenv install --dev
+	poetry install
 
 build:
-	python -m build
+	poetry build
 
 clean:
-	rm -rf *.egg-info dist
+	rm -rf .coverage htmlcov .mypy_cache .pytest_cache dist
 
 publish: build
-	twine upload dist/*
+	poetry publish
